@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import validate from '@utils/validate';
 import api from '@api';
-import { Alert } from 'antd';
+
 export default function Login() {
   useEffect(() => {
     if(localStorage.getItem("token")) {
