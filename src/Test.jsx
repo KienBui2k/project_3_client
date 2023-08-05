@@ -1,4 +1,4 @@
 import { Route } from "react-router-dom";
-import Example from "./pages/examples/Example";
+import Example from "./pages/subPages/Example";
 
-export default <Route path="/examples" element={<Example></Example>}></Route>;
+export default <Route path="/subPages" element={<Example></Example>}></Route>;

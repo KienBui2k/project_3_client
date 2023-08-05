@@ -1,88 +1,91 @@
-import React from 'react'
-import './Footer.css'
-export default function Footer() {
-  return (
-    <>
-  {/* FOOTER */}
-  <footer className="w-100 py-4 flex-shrink-0">
-    <div className="container py-4">
-      <div className="row gy-4 gx-5">
-        <div className="col-lg-4 col-md-6">
-          <h5 className="h1 text-white">FB.</h5>
-          <p className="small text-muted">
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-            eiusmod tempor incididunt.
-          </p>
-          <p className="small text-muted mb-0">
-            © Copyrights. All rights reserved.{" "}
-            <a className="text-primary" href="#">
-              Bootstrapious.com
-            </a>
-          </p>
-        </div>
-        <div className="col-lg-2 col-md-6">
-          <h5 className="text-white mb-3">Quick links</h5>
-          <ul className="list-unstyled text-muted">
-            <li>
-              <a href="#">Home</a>
-            </li>
-            <li>
-              <a href="#">About</a>
-            </li>
-            <li>
-              <a href="#">Get started</a>
-            </li>
-            <li>
-              <a href="#">FAQ</a>
-            </li>
-          </ul>
-        </div>
-        <div className="col-lg-2 col-md-6">
-          <h5 className="text-white mb-3">Quick links</h5>
-          <ul className="list-unstyled text-muted">
-            <li>
-              <a href="#">Home</a>
-            </li>
-            <li>
-              <a href="#">About</a>
-            </li>
-            <li>
-              <a href="#">Get started</a>
-            </li>
-            <li>
-              <a href="#">FAQ</a>
-            </li>
-          </ul>
-        </div>
-        <div className="col-lg-4 col-md-6">
-          <h5 className="text-white mb-3">Newsletter</h5>
-          <p className="small text-muted">
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-            eiusmod tempor incididunt.
-          </p>
-          <form action="#">
-            <div className="input-group mb-3">
-              <input
-                className="form-control"
-                type="text"
-                placeholder="Recipient's username"
-                aria-label="Recipient's username"
-                aria-describedby="button-addon2"
-              />
-              <button
-                className="btn btn-primary"
-                id="button-addon2"
-                type="button"
-              >
-                <i className="fas fa-paper-plane" />
-              </button>
-            </div>
-          </form>
-        </div>
-      </div>
-    </div>
-  </footer>
-</>
+import React from "react";
+import "./Footer.scss";
+import { Link, useNavigate } from "react-router-dom";
 
-  )
+export default function Footer() {
+    const navigate = useNavigate();
+    return (
+        <section className="footer_conteiner">
+            <div className="footer">
+                <div className="box-container">
+                    <div className="box">
+                        <h3>our menu</h3>
+                        <a
+                            href="#popular"
+                            onClick={() => navigate("/menu/pizza")}
+                        >
+                            <i className="fas fa-arrow-right"></i> pizza
+                        </a>
+                        <a
+                            href="#popular"
+                            onClick={() => navigate("/menu/burger")}
+                        >
+                            <i className="fas fa-arrow-right"></i> burger
+                        </a>
+                        <a
+                            href="#popular"
+                            onClick={() => navigate("/menu/chicken")}
+                        >
+                            <i className="fas fa-arrow-right"></i> chicken
+                        </a>
+                        <a
+                            href="#popular"
+                            onClick={() => navigate("/menu/combo")}
+                        >
+                            <i className="fas fa-arrow-right"></i> combo
+                        </a>
+                        <a
+                            href="#popular"
+                            onClick={() => navigate("/menu/drink")}
+                        >
+                            <i className="fas fa-arrow-right"></i> drink
+                        </a>
+                    </div>
+
+                    <div className="box">
+                        <h3>quick links</h3>
+                        <a href="#home" onClick={() => navigate("/")}>
+                            {" "}
+                            <i className="fas fa-arrow-right"></i> home
+                        </a>
+                        <a href="#about" onClick={() => navigate("/")}>
+                            {" "}
+                            <i className="fas fa-arrow-right"></i> about
+                        </a>
+                        <a href="#category" onClick={() => navigate("/")}>
+                            {" "}
+                            <i className="fas fa-arrow-right"></i> category
+                        </a>
+                    </div>
+
+                    <div className="box">
+                        <h3>extra links</h3>
+                        <a href="#order" onClick={() => navigate("/order")}>
+                            {" "}
+                            <i className="fas fa-arrow-right"></i> my orders
+                        </a>
+                    </div>
+
+                    <div className="box">
+                        <h3>opening hours</h3>
+                        <p>monday : 7:00am to 10:00pm</p>
+                        <p>tuesday : 7:00am to 10:00pm</p>
+                        <p>wednesday : 7:00am to 10:00pm</p>
+                        <p>thursday : 7:00am to 10:00pm</p>
+                        <p>friday : 7:00am to 10:00pm</p>
+                        <p>saturday and sunday : 7:00am to 10:00pm</p>
+                    </div>
+                </div>
+                <div className="bottom">
+                    <div className="share">
+                        <a href="#" className="fab fa-facebook-f"></a>
+                        <a href="#" className="fab fa-twitter"></a>
+                        <a href="#" className="fab fa-instagram"></a>
+                        <a href="#" className="fab fa-linkedin"></a>
+                        <a href="#" className="fab fa-pinterest"></a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    );
 }
