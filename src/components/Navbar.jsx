@@ -5,8 +5,12 @@ import { AutoComplete, Input } from "antd";
 import { UserOutlined } from "@ant-design/icons";
 import { useState } from "react";
 import { useNavigate } from "react-router";
+import DropdownLogout from "./Dropdowns/Dropdown";
 
 export default function Navbar() {
+    const [isLogin, setIsLogin] = useState(
+        () => localStorage.getItem("token") || null
+    );
     const navigate = useNavigate();
     const renderTitle = (title) => (
         <span>
@@ -77,21 +81,23 @@ export default function Navbar() {
                 </div>
 
                 <div className="middle_content">
-                    <div
-                        onClick={() => {
-                            navigate("/");
-                        }}
-                        className="item"
-                    >
-                        Home
+                    <div className="item">
+                        <a href="#home" onClick={() => navigate("/")}>
+                            Home
+                        </a>
                     </div>
-                    <div
+                    {/* <div
                         onClick={() => {
                             navigate("/about");
                         }}
                         className="item"
                     >
                         About
+                    </div> */}
+                    <div>
+                        <a href="#about" onClick={() => navigate("/")}>
+                            about
+                        </a>
                     </div>
                     <div className="item">Contacts</div>
                     <div className="item">Menu</div>
@@ -113,6 +119,7 @@ export default function Navbar() {
                     <i className="fa-regular fa-heart"></i>
                     {/* Cart */}
                     <i className="fa-solid fa-bag-shopping"></i>
+                    {isLogin ? <DropdownLogout /> : <></>}
                 </div>
             </div>
         </nav>

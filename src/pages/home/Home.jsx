@@ -36,7 +36,14 @@ function Home() {
                   </h1> */}
                     <h1 className="brand_name">Fastfood</h1>
                     <div className="feature">
-                        <span className="feature_item">Find a Store</span>
+                        <span
+                            onClick={() => {
+                                navigate("/admin");
+                            }}
+                            className="feature_item"
+                        >
+                            Find a Store
+                        </span>
 
                         {/* //<span className="feature_item">Login</span> */}
                         {isLogin ? (
