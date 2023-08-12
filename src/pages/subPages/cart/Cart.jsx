@@ -24,7 +24,7 @@ export default function Cart() {
     }, 0);
     // console.log("cartStore", cartStore);
     console.log("cartItems", cartItems);
-    console.log("cartItems", cartItems.length);
+
     // return;
     return (
         <>

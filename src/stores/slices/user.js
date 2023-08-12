@@ -47,6 +47,7 @@ const userSlice = createSlice({
       state.data = action.payload.data;
     });
     builder.addCase(authenToken.rejected, (state, action) => {
+      console.log("rejected mat roi");
       localStorage.removeItem("token");
     })
 

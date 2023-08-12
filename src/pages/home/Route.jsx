@@ -39,5 +39,9 @@ export default (
                 import("../subPages/cart/Payment/Payment")
             )()}
         ></Route>
+        <Route
+            path="/receipts"
+            element={LazyLoad(() => import("../subPages/Receipts/Receipts"))()}
+        ></Route>
     </Route>
 );

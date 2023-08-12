@@ -9,10 +9,9 @@ import DropdownLogout from "./Dropdowns/Dropdown";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import { RootContext } from "../App";
-import Example from "../pages/subPages/search/n";
 
 export default function Navbar() {
-    const {cartStore } = useContext(RootContext);
+    const { cartStore } = useContext(RootContext);
     const { t } = useTranslation();
     const [isLogin, setIsLogin] = useState(
         () => localStorage.getItem("token") || null
@@ -141,12 +140,11 @@ export default function Navbar() {
                     </div>
                     <div
                         onClick={() => {
-                            // navigate("/search");
-                            <Example></Example>;
+                            navigate("/search");
                         }}
                         className="item"
                     >
-                        Tìm kiếm
+                        Tìm Kiếm
                     </div>
                 </div>
 

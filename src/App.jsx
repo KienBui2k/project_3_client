@@ -14,7 +14,6 @@ export const RootContext = createContext();
 
 function App() {
     const store = useSelector((store) => store);
-
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -39,6 +38,28 @@ function App() {
                 alert("server đang bảo trì!");
             });
     }, [store.userStore?.data]);
+
+    // khi da dawng nhap thi keo cart cua user ve
+    useEffect(() => {
+        if (!store.userStore.data) {
+            return;
+        }
+        api.receipt
+            .findReceipt(store.userStore.data?.id)
+            .then((res) => {
+                if (res.status == 200) {
+                    dispatch(
+                        actions.receiptActions.setReceiptData(res.data.data)
+                    );
+                } else {
+                    alert(res.data.message);
+                }
+            })
+            .catch((err) => {
+                alert("sập!");
+            });
+    }, [store.userStore.data]);
+
     return (
         <RootContext.Provider
             value={{
@@ -49,6 +70,7 @@ function App() {
                 cartActions: actions.cartActions,
                 productActions: actions.productActions,
                 productStore: store.productStore,
+                receiptStore: store.receiptStore,
             }}
         >
             <Routes>

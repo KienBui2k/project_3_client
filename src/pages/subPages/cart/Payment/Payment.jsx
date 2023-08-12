@@ -30,6 +30,7 @@ export default function Payment() {
             }, 0),
             pay_mode: eventForm.target.payment.value,
             paid: eventForm.target.payment.value == "CASH" ? false : true,
+            user_id: userStore.data.id,
         };
         /* Req.body.receiptDetails */
         let receiptDetails = [];

@@ -14,10 +14,10 @@ export default function Qr({ url, title, orderId }) {
     return (
         <div className="qr_modal">
             <h2>{title}</h2>
-            {/* <h2>{orderId}</h2> */}
+           
             <QRCode
                 value={url}
-                icon="https://chatuchak.vn/image/cache/catalog/new/icon-tui-xach-200x200.png"
+                icon="https://www.taichinhz.com/wp-content/uploads/2021/10/zalopay-la-gi.jpg"
             />
             <Spin indicator={antIcon} />
         </div>
