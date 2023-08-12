@@ -3,7 +3,9 @@ import validate from "@utils/validate";
 import api from "@api";
 import toast, { Toaster } from "react-hot-toast";
 import { useNavigate } from "react-router";
+import { useTranslation } from "react-i18next";
 export default function Login() {
+    const { t } = useTranslation();
     const navigate = useNavigate();
     const toastSuccess = (text) => {
         toast.success(text, {
@@ -51,7 +53,9 @@ export default function Login() {
                         e.target.user_name.value == "" ||
                         e.target.password.value == ""
                     ) {
-                        toastWarning("bạn chưa điền đủ các trường thông tin");
+                        toastWarning(
+                            t("You_have_not_filled_in_all_the_required_fields")
+                        );
                         return;
                     }
                     let data = {
@@ -64,13 +68,13 @@ export default function Login() {
                         let result = await api.users.login(data);
                         if (result.status == 200) {
                             if (result.data.token == undefined) {
-                                toastError("Đăng nhập thất bại");
+                                toastError(t("Login_failed"));
                             } else {
                                 localStorage.setItem(
                                     "token",
                                     result.data.token
                                 );
-                                toastSuccess("Đăng nhập Thành Công");
+                                toastSuccess(t("Login_Successful"));
                                 window.location.href = "/";
                             }
                         } else {
@@ -103,13 +107,13 @@ export default function Login() {
                                         fontSize: "18px",
                                     }}
                                 >
-                                    Trang chủ
+                                    {t("home")}
                                 </button>
                                 <h2
                                     style={{ textAlign: "center" }}
                                     className="fw-bold mb-5"
                                 >
-                                    Login Form
+                                    {t("Login_Form")}
                                 </h2>
                                 <div>
                                     {/* Email input */}
@@ -122,11 +126,11 @@ export default function Login() {
                                             }}
                                             className="form-label"
                                         >
-                                            User Name or Email
+                                            {t("userName_email")}
                                         </label>
                                         <input
                                             type="text"
-                                            placeholder="User Name or Email"
+                                            placeholder={t("userName_email")}
                                             className="form-control"
                                             name="user_name"
                                             style={{
@@ -146,11 +150,11 @@ export default function Login() {
                                             }}
                                             className="form-label"
                                         >
-                                            Password
+                                            {t("Password")}
                                         </label>
                                         <input
                                             type="password"
-                                            placeholder="Password"
+                                            placeholder={t("Password")}
                                             className="form-control"
                                             name="password"
                                             style={{
@@ -167,7 +171,7 @@ export default function Login() {
                                         type="submit"
                                         className="btn btn-primary btn-block mb-4"
                                     >
-                                        Login
+                                        {t("Login")}
                                     </button>
                                     {/* Register buttons */}
 
@@ -184,7 +188,7 @@ export default function Login() {
                                                 textTransform: "none",
                                             }}
                                         >
-                                            Register Now{" "}
+                                            {t("Register_Now")}
                                         </button>{" "}
                                         <span
                                             style={{
@@ -197,7 +201,7 @@ export default function Login() {
                                             }}
                                         >
                                             {" "}
-                                            or Login with:
+                                            {t("or_Login_with")}
                                         </span>
                                         <br />
                                         <button

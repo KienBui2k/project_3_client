@@ -1,6 +1,6 @@
 import "./home.scss";
 import { Outlet } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useEffect, useContext } from "react";
 
 import Navbar from "@components/Navbar";
 import Footer from "@components/Footer";
@@ -8,18 +8,17 @@ import Footer from "@components/Footer";
 import { useTranslation } from "react-i18next";
 
 import { useNavigate } from "react-router";
-import { useDispatch, useSelector } from "react-redux";
-import { userActions } from "@actions/user";
+
+import { RootContext } from "../../App";
 
 function Home() {
-    const store = useSelector((store) => store);
+    const { userStore, dispatch, userActions } = useContext(RootContext);
     const navigate = useNavigate();
     const { t } = useTranslation();
     // const [isLogin, setIsLogin] = useState(
     //     () => localStorage.getItem("token") || null
     // );
     const isLogin = localStorage.getItem("token") || null;
-    const dispatch = useDispatch();
 
     useEffect(() => {
         dispatch(userActions.authenToken());
@@ -38,11 +37,11 @@ function Home() {
                     <div className="feature">
                         <span
                             onClick={() => {
-                                navigate("/admin");
+                                navigate("/admin.v2");
                             }}
                             className="feature_item"
                         >
-                            Find a Store
+                            {t("Find_a_Store")}
                         </span>
 
                         {/* //<span className="feature_item">Login</span> */}
@@ -51,17 +50,13 @@ function Home() {
                             <span
                                 className="feature_item"
                                 onClick={() => {
-                                    if (
-                                        window.confirm(
-                                            "Do you wan't to Log out"
-                                        )
-                                    ) {
+                                    if (window.confirm(t("Log_out_confirm"))) {
                                         localStorage.removeItem("token");
                                         window.location.href = "/";
                                     }
                                 }}
                             >
-                                Log out
+                                {t("Log out")}
                             </span>
                         ) : (
                             // Nút đăng nhập
@@ -71,14 +66,14 @@ function Home() {
                                     navigate("/login");
                                 }}
                             >
-                                Login
+                                {t("Login")}
                             </span>
                         )}
-                        {store.userStore?.data?.first_name &&
-                        store.userStore?.data?.last_name ? (
+                        {userStore?.data?.first_name &&
+                        userStore?.data?.last_name ? (
                             <span className="feature_item">
-                                {t("hello")} {store.userStore?.data?.first_name}{" "}
-                                {store.userStore?.data?.last_name}
+                                {t("hello")} {userStore?.data?.first_name}{" "}
+                                {userStore?.data?.last_name}
                                 {"!"}
                             </span>
                         ) : (

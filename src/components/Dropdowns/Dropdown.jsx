@@ -1,15 +1,14 @@
 import React from "react";
 import "./dropdown.scss";
-import { useNavigate } from "react-router-dom";
-
+import { Link, useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 export default function DropdownLogout({ userStore }) {
-    console.log("userStore", userStore);
+    const { t } = useTranslation();
     const navigate = useNavigate();
     const handleLogout = () => {
-        if (window.confirm("Bạn có muốn đăng xuất không?")) {
+        if (window.confirm(t("Log_out_confirm"))) {
             localStorage.removeItem("token");
-            // dispatch(userLoginActions.logOut());
-            navigate("/login");
+            navigate("/");
         }
     };
     return (
@@ -25,9 +24,9 @@ export default function DropdownLogout({ userStore }) {
             </button>
             <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton">
                 <li>
-                    <a className="dropdown-item" href="profile">
+                    <Link className="dropdown-item" to="profile">
                         Profile
-                    </a>
+                    </Link> 
                 </li>
                 <li>
                     <a

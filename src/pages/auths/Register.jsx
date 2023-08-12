@@ -2,7 +2,9 @@ import React from "react";
 import api from "@api";
 import toast, { Toaster } from "react-hot-toast";
 import { useNavigate } from "react-router";
+import { useTranslation } from "react-i18next";
 export default function Register() {
+    const { t } = useTranslation();
     const navigate = useNavigate();
     const toastSuccess = (text) => {
         toast.success(text, {
@@ -94,13 +96,13 @@ export default function Register() {
                                         fontSize: "18px",
                                     }}
                                 >
-                                    Trang chủ
+                                    {t("home")}
                                 </button>
                                 <h2
                                     style={{ textAlign: "center" }}
                                     className="fw-bold mb-5"
                                 >
-                                    Register Form
+                                    {t("Register_Form")}
                                 </h2>
                                 <div>
                                     {/* 2 column grid layout with text inputs for the first and last names */}
@@ -114,11 +116,13 @@ export default function Register() {
                                                     }}
                                                     className="form-label"
                                                 >
-                                                    First name
+                                                    {t("First_name")}
                                                 </label>
                                                 <input
                                                     type="text"
-                                                    placeholder="Enter first name"
+                                                    placeholder={t(
+                                                        "First_name"
+                                                    )}
                                                     className="form-control"
                                                     name="first_name"
                                                     style={{
@@ -138,11 +142,11 @@ export default function Register() {
                                                     }}
                                                     className="form-label"
                                                 >
-                                                    Last name
+                                                    {t("Last_name")}
                                                 </label>
                                                 <input
                                                     type="text"
-                                                    placeholder="Enter last name"
+                                                    placeholder={t("Last_name")}
                                                     className="form-control"
                                                     name="last_name"
                                                     style={{
@@ -163,11 +167,11 @@ export default function Register() {
                                             }}
                                             className="form-label"
                                         >
-                                            User name
+                                            {t("Use_name")}
                                         </label>
                                         <input
                                             type="text"
-                                            placeholder="Enter user name"
+                                            placeholder={t("Use_name")}
                                             className="form-control"
                                             name="user_name"
                                             style={{
@@ -190,7 +194,7 @@ export default function Register() {
                                         </label>
                                         <input
                                             type="email"
-                                            placeholder="Enter email"
+                                            placeholder={t("Enter_email")}
                                             className="form-control"
                                             name="email"
                                             style={{
@@ -209,11 +213,11 @@ export default function Register() {
                                             }}
                                             className="form-label"
                                         >
-                                            Password
+                                            {t("Password")}
                                         </label>
                                         <input
                                             type="password"
-                                            placeholder="Password"
+                                            placeholder={t("Password")}
                                             className="form-control"
                                             name="password"
                                             style={{
@@ -228,7 +232,7 @@ export default function Register() {
                                         type="submit"
                                         className="btn btn-primary btn-block mb-4"
                                     >
-                                        Register
+                                        {t("Register")}
                                     </button>
                                     {/* Register buttons */}
                                     <div className="text-center">
@@ -244,7 +248,7 @@ export default function Register() {
                                                 textTransform: "none",
                                             }}
                                         >
-                                            Login Now{" "}
+                                            {t("Login_Now")}
                                         </button>{" "}
                                         <span
                                             style={{
@@ -256,8 +260,7 @@ export default function Register() {
                                                 alignItems: "center",
                                             }}
                                         >
-                                            {" "}
-                                            or Register with:
+                                            {t("or_Register_with")}
                                         </span>
                                         <br />
                                         <button

@@ -13,7 +13,7 @@ module.exports = {
       '@api': path.resolve(__dirname, 'src/services/api'),
       '@actions': path.resolve(__dirname, 'src/stores/slices'),
       '@utils': path.resolve(__dirname, 'src/utils'),
-      '@lazy': path.resolve(__dirname, 'src/lazy_loadings')
+      '@lazy': path.resolve(__dirname, 'src/lazy_loadings'),
     }
   },
 };

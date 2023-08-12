@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 
 /* Antd */
 import { AutoComplete, Input } from "antd";
@@ -6,8 +6,14 @@ import { UserOutlined } from "@ant-design/icons";
 import { useState } from "react";
 import { useNavigate } from "react-router";
 import DropdownLogout from "./Dropdowns/Dropdown";
+import { useTranslation } from "react-i18next";
+import { Link } from "react-router-dom";
+import { RootContext } from "../App";
+import Example from "../pages/subPages/search/n";
 
 export default function Navbar() {
+    const {cartStore } = useContext(RootContext);
+    const { t } = useTranslation();
     const [isLogin, setIsLogin] = useState(
         () => localStorage.getItem("token") || null
     );
@@ -81,44 +87,104 @@ export default function Navbar() {
                 </div>
 
                 <div className="middle_content">
-                    <div className="item">
-                        <a href="#home" onClick={() => navigate("/")}>
-                            Home
-                        </a>
+                    <div onClick={() => navigate("/")} className="item">
+                        {t("home")}
                     </div>
-                    {/* <div
+                    <div
                         onClick={() => {
                             navigate("/about");
                         }}
                         className="item"
                     >
-                        About
-                    </div> */}
-                    <div>
-                        <a href="#about" onClick={() => navigate("/")}>
-                            about
-                        </a>
+                        {t("about")}
                     </div>
-                    <div className="item">Contacts</div>
-                    <div className="item">Menu</div>
+                    <div className="dropdown">
+                        <button
+                            className="btn btn-primary dropdown-toggle menu-button"
+                            type="button"
+                            id="dropdownMenuButton"
+                            data-mdb-toggle="dropdown"
+                            aria-expanded="false"
+                        >
+                            {t("menu")}
+                            <i className="fa-solid fa-caret-down"></i>
+                        </button>
+                        <ul
+                            className="dropdown-menu"
+                            aria-labelledby="dropdownMenuButton"
+                        >
+                            <Link to="menu/combo">
+                                <span className="dropdown-item">Combo</span>
+                            </Link>
+                            <Link to="menu/pizza">
+                                <span className="dropdown-item">Pizza</span>
+                            </Link>
+                            <Link to="menu/burger">
+                                <span className="dropdown-item">Burger</span>
+                            </Link>
+                            <Link to="menu/chicken">
+                                <span className="dropdown-item">Chicken</span>
+                            </Link>
+                            <Link to="menu/drink">
+                                <span className="dropdown-item">Drink</span>
+                            </Link>
+                        </ul>
+                    </div>
+
+                    <div
+                        onClick={() => {
+                            navigate("/contact");
+                        }}
+                        className="item"
+                    >
+                        {t("contactus")}
+                    </div>
+                    <div
+                        onClick={() => {
+                            // navigate("/search");
+                            <Example></Example>;
+                        }}
+                        className="item"
+                    >
+                        Tìm kiếm
+                    </div>
                 </div>
 
                 <div className="right_content">
                     {/* Search */}
                     <AutoComplete
                         popupClassName="certain-category-search-dropdown"
-                        dropdownMatchSelectWidth={500}
+                        popupMatchSelectWidth={500}
                         style={{
                             width: 250,
                         }}
                         options={options}
                     >
-                        <Input.Search size="large" placeholder="input here" />
+                        <Input.Search
+                            style={{ position: "relative", right: "30px" }}
+                            size="large"
+                            placeholder="input here"
+                        />
                     </AutoComplete>
-                    {/* Wishlist */}
-                    <i className="fa-regular fa-heart"></i>
+
                     {/* Cart */}
-                    <i className="fa-solid fa-bag-shopping"></i>
+                    <div
+                        onClick={() => {
+                            navigate("/cart");
+                        }}
+                        className="cart_coutn "
+                    >
+                        <span>
+                            {cartStore.data?.cart_details?.reduce(
+                                (result, nextItem) => {
+                                    return (result += nextItem.quantity);
+                                },
+                                0
+                            )}
+                        </span>
+                        <i className="fa-solid fa-cart-shopping"></i>
+                    </div>
+
                     {isLogin ? <DropdownLogout /> : <></>}
                 </div>
             </div>

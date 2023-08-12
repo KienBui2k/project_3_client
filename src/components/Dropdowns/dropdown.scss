@@ -25,6 +25,10 @@
         flex-direction: column;
         align-items: center;
         gap: 0px;
+        color: white;
+        &:hover {
+            color: blue;
+        }
         span {
             font-size: 7px !important;
             // margin-top: -9px;
