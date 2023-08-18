@@ -18,7 +18,9 @@
 .dropdown-toggle:after {
     display: none;
 }
-
+// .dropdown-toggle ion-icon {
+//     co
+// }
 .dropdown {
     button {
         display: flex;
@@ -26,12 +28,13 @@
         align-items: center;
         gap: 0px;
         color: white;
-        &:hover {
-            color: blue;
-        }
+        // ion-icon {
+        //     color: white;
+        // }
+        // &:hover {
+        // }
         span {
             font-size: 7px !important;
-            // margin-top: -9px;
         }
         .userName {
             font-weight: 900;

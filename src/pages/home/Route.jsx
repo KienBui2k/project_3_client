@@ -43,5 +43,9 @@ export default (
             path="/receipts"
             element={LazyLoad(() => import("../subPages/Receipts/Receipts"))()}
         ></Route>
+        <Route
+            path="/profile"
+            element={LazyLoad(() => import("../subPages/info/Info"))()}
+        ></Route>
     </Route>
 );

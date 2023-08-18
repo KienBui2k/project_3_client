@@ -5,8 +5,10 @@ import api from "@api";
 import { Spin } from "antd";
 import { LoadingOutlined } from "@ant-design/icons";
 import { convertToUSD } from "@mieuteacher/meomeojs";
+import { useNavigate } from "react-router";
 
 export default function Search() {
+    const navigate = useNavigate();
     const antIcon = (
         <LoadingOutlined
             style={{
@@ -94,7 +96,7 @@ export default function Search() {
                 </div>
                 {searchStatus ? (
                     <div className="loading">
-                        <Spin indicator={antIcon} />
+                        <Spin indicator="https://png.pngtree.com/png-vector/20200224/ourmid/pngtree-colorful-loading-icon-png-image_2152960.jpg" />
                     </div>
                 ) : (
                     <></>

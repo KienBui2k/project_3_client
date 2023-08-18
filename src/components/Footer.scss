@@ -4,7 +4,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #d1cdcd;
+    background-color: #383636;
     .footer {
         width: $maxW;
         .box-container {
@@ -14,34 +14,37 @@
             .box {
                 h3 {
                     font-size: 1.8rem;
-
                     padding: 1rem 0;
+                    color: white;
                 }
 
                 p {
                     font-size: 1.2rem;
-                    color: #666;
+                    color: white;
                     padding: 1rem 0;
                 }
 
                 a {
                     display: block;
                     font-size: 1.2rem;
-                    color: #666;
+                    color: white;
                     padding: 1rem 0;
 
                     i {
                         padding-right: 0.5rem;
-                        color: #27ae60;
+                        color: white;
                     }
                 }
 
                 a:hover {
-                    color: #27ae60;
+                    color: white;
                 }
 
                 a:hover i {
                     padding-right: 2rem;
+                }
+                span {
+                    color: white;
                 }
             }
         }
@@ -50,7 +53,7 @@
             text-align: center;
 
             .share {
-                margin: 1.5rem 0;
+                margin: 1rem 0;
 
                 a {
                     height: 4rem;

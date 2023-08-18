@@ -1,21 +1,25 @@
 .shipping {
     display: flex;
-    justify-content:space-evenly;
+    justify-content: space-evenly;
     margin-top: 20px;
     height: calc(100vh - 100px);
 
     .form-group {
         border: 1px solid black;
+        background-image: url("https://wallpaperaccess.com/full/504577.jpg");
         padding: 20px;
-        width: 400px;
-        height: 500px;
+        width: 500px;
+        height: 600px;
         border-radius: 10px;
-        -webkit-box-shadow: 3px 5px 11px 4px rgba(3, 35, 54, 0.74);
-            box-shadow: 3px 5px 11px 4px rgba(3, 35, 54, 0.74);
-
+        -webkit-box-shadow: 3px 5px 11px 4px rgba(233, 237, 240, 0.74);
+        box-shadow: 3px 5px 11px 4px rgba(141, 148, 151, 0.74);
+        .form-info {
+            width: 100%;
+            height: 40%;
+        }
         h2 {
             font-weight: bold;
-            
+            color: white;
         }
 
         .form-groupInput {
@@ -28,113 +32,180 @@
                 padding-left: 10px;
             }
         }
+    }
 
-        .form-group-checkout {
-            margin-top: 20px;
+    .shipping-form {
+        width: 100%;
+        height: 60%;
+
+        .shipping_detail {
             width: 100%;
-            height: 40px;
-            cursor: pointer;
-            color: rgb(236, 229, 229);
-            font-size: 20px;
-            line-height: 16px;
-            padding: 9px;
-            border-radius: 10px;
-            font-family: Georgia, serif;
-                font-weight: normal;
+            height: 70%;
+
+            margin: 10px 0;
+            display: flex;
+            flex-direction: row;
+
+            .shippingDetails_img {
+                width: 50%;
+                height: 100%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                img {
+                    width: 90%;
+                    max-width: 92%;
+                }
+            }
+            .shipping_method {
+                width: 50%;
+                height: 100%;
+                display: flex;
+                flex-direction: column;
+                p {
+                    color: white;
+                    margin: 16px 0 0 16px !important;
+                }
+                span {
+                    color: white;
+                }
+                input {
+                    margin: 15px 10px;
+                }
+                .group_method {
+                    margin-left: 16px;
+                }
+                // img {
+                //     width: 150px;
+                //     margin-left: 8px;
+                // }
+            }
+        }
+        .check_out_btn_container {
+            width: 100%;
+            height: 30%;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            .form-group-checkout {
+                // margin-top: 20px;
+                margin: 0 10px;
+                width: 40%;
+                height: 40px;
+                cursor: pointer;
+                color: rgb(8, 8, 8);
+                font-size: 20px;
+                line-height: 16px;
+                padding: 9px;
+                border-radius: 10px;
+                font-family: Georgia, serif;
+                font-weight: 800;
                 text-decoration: none;
                 font-style: normal;
                 font-variant: normal;
                 text-transform: none;
-                background-image: linear-gradient(to right, rgb(20, 37, 30) 0%, rgb(54, 58, 56) 50%, rgb(36, 58, 52) 100%);
+                background-image: linear-gradient(
+                    to right,
+                    rgb(247, 250, 249) 0%,
+                    rgb(213, 221, 217) 50%,
+                    rgb(146, 150, 149) 100%
+                );
                 display: inline-block;
-        }
+                &:hover {
+                    background-image: linear-gradient(
+                        to right,
+                        rgb(30, 30, 30) 0%,
+                        rgb(50, 50, 50) 50%,
 
-
-    }
-
-    .shippingDetails {
-        margin-top: 10px;
-        input{
-            margin: 15px 10px;
-        }
-
-        img {
-            width: 150px;
-            margin-left: 8px;
-        }
-
-        .shippingDetails_button {
-
-            img {
-                height: 30px;
+                        rgb(40, 40, 40) 100%
+                    );
+                    color: white;
+                }
             }
         }
-
-
     }
 
     .informationLine {
         border: 1px solid black;
+        background-image: url("https://wallpaperaccess.com/full/504577.jpg");
         padding: 20px;
-        width: 430px;
+        width: 500px;
         overflow-y: auto;
         overflow-x: hidden;
-        height: 500px;
+        height: 600px;
         border-radius: 10px;
-        -webkit-box-shadow: 3px 5px 11px 4px rgba(3, 35, 54, 0.74);
-            box-shadow: 3px 5px 11px 4px rgba(3, 35, 54, 0.74);
+        -webkit-box-shadow: 3px 5px 11px 4px rgba(233, 237, 240, 0.74);
+        box-shadow: 3px 5px 11px 4px rgba(141, 148, 151, 0.74);
 
         .informationLine_product {
+            // display: flex;
+            // height: 100%;
+            width: 100%;
+            height: 120px;
+            margin-bottom: 8px;
+            background-color: rgb(238, 245, 245);
+            border-radius: 12px;
             display: flex;
-            height: 100%;
 
-            img {
-                width: 100px;
-                height: 100px;
+            .product_img {
+                width: 40%;
+                height: 100%;
+
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                img {
+                    // width: 90%;
+                    height: 100%;
+                }
             }
 
             .informationLine_text {
-                margin-left: 30px;
+                width: 60%;
+                height: 100%;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-evenly;
+                // align-items: center;
+                // background-color: red;
 
                 h4 {
                     color: rgb(24, 30, 24);
                     font-weight: bold;
+                    margin-left: 20px;
                 }
 
                 p {
-                    color: rgb(235, 81, 81);
+                    color: red;
                     font-weight: bold;
+                    margin-left: 20px;
                 }
             }
         }
 
         .informationLine_total {
             margin-top: 20px;
-            border-top: 2px solid green;
+            border-top: 2px solid rgb(246, 250, 246);
             display: flex;
-            height: 100%;
+            height: 30%;
 
             h3 {
                 margin-top: 20px;
                 font-weight: bold;
-              
+                color: white;
             }
 
             span {
                 margin-top: 20px;
                 margin-left: 180px;
-                color: red;
+                color: white;
                 font-weight: bold;
                 font-size: 20px;
             }
         }
-
-
     }
-
 }
-
-
 
 ::-webkit-scrollbar {
     width: 5px;

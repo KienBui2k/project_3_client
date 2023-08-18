@@ -3,16 +3,41 @@ import "./productDetail.scss";
 
 import { useParams } from "react-router";
 import { useSelector } from "react-redux";
+import toast, { Toaster } from "react-hot-toast";
 import { productActions } from "../../../stores/slices/product";
-
+import { useNavigate } from "react-router";
 import { RootContext } from "../../../App";
 import api from "../../../services/api";
 export default function ProductDetail() {
     const { id } = useParams();
     const [quantity, setQuantity] = useState(1);
-
-    const { userStore, cartActions, dispatch } = useContext(RootContext);
-
+    const navigate = useNavigate();
+    const {
+        userStore,
+        cartActions,
+        dispatch,
+        setLocalCartState,
+        localCartState,
+    } = useContext(RootContext);
+    const toastSuccess = (text) => {
+        toast.success(text, {
+            position: "top-center",
+        });
+    };
+    const toastError = (text) => {
+        toast.error(text, {
+            position: "top-center",
+        });
+    };
+    const toastWarning = (text) => {
+        toast(text, {
+            icon: "⚠️",
+            style: {
+                color: "#000",
+            },
+            position: "top-center",
+        });
+    };
     const [note, setNote] = useState("");
     const productStore = useSelector((store) => store.productStore);
     useEffect(() => {
@@ -25,30 +50,59 @@ export default function ProductDetail() {
             quantity,
             note: note,
         };
-        api.purchase
-            .addToCart(user_id, data)
-            .then((res) => {
-                console.log("res 1", res);
-                api.purchase
-                    .findCart(userStore.data?.id)
-                    .then((res) => {
-                        dispatch(cartActions.setCartData(res.data.data));
-                    })
-                    .catch((err) => {
-                        console.log("err", err);
-                        alert("Server bảo trì!");
-                    });
-            })
-            .catch((err) => {
-                alert("Sập!", err);
-            });
+        if (localStorage.getItem("token")) {
+            api.purchase
+                .addToCart(user_id, data)
+                .then((res) => {
+                    console.log("res 1", res);
+                    api.purchase
+                        .findCart(userStore.data?.id)
+                        .then((res) => {
+                            toastSuccess(
+                                "thêm sản phẩm vào giỏ hàng thành công"
+                            );
+                            dispatch(cartActions.setCartData(res.data.data));
+                            navigate("/");
+                        })
+                        .catch((err) => {
+                            console.log("err", err);
+                            alert("Server bảo trì!");
+                        });
+                })
+                .catch((err) => {
+                    alert("Sập!", err);
+                });
+        } else {
+            let carts = localStorage.getItem("carts");
+            if (carts) {
+                carts = JSON.parse(carts);
+                let flag = false;
+                carts = carts.map((item) => {
+                    if (item.product_id == data.product_id) {
+                        item.quantity += data.quantity;
+                        flag = true;
+                    }
+                    return item;
+                });
+                if (!flag) {
+                    carts.push(data);
+                }
+                localStorage.setItem("carts", JSON.stringify(carts)); // save
+            } else {
+                let cartTemp = [];
+                cartTemp.push(data);
+                localStorage.setItem("carts", JSON.stringify(cartTemp)); // save
+            }
+            setLocalCartState(!localCartState);
+        }
     }
+
     return (
         <div className="main">
             <div className="productDetail_main">
                 <div className="productDetail_container">
                     <div className="productDetail_img">
-                        <img src="../images/about-img.png" alt="" />
+                        <img src={productStore?.data?.avatar} alt="" />
                     </div>
                     <div className="productDetail_content">
                         <div className="product_name">
@@ -115,6 +169,7 @@ export default function ProductDetail() {
                     </div>
                 </div>
             </div>
+            <Toaster />
         </div>
     );
 }

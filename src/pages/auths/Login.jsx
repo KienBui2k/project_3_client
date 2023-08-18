@@ -74,8 +74,28 @@ export default function Login() {
                                     "token",
                                     result.data.token
                                 );
-                                toastSuccess(t("Login_Successful"));
-                                window.location.href = "/";
+                                if (localStorage.getItem("carts")) {
+                                    let carts = JSON.parse(
+                                        localStorage.getItem("carts")
+                                    );
+                                    await carts.map(async (item) => {
+                                        await api.purchase
+                                            .addToCart(result.data.userId, item)
+                                            .then((res) => {
+                                                console.log("res", res);
+                                            })
+                                            .catch((err) => {
+                                                alert("looix");
+                                            });
+                                        return item;
+                                    });
+                                    localStorage.removeItem("carts");
+                                    toastSuccess(t("Login_Successful"));
+                                    window.location.href = "/";
+                                } else {
+                                    toastSuccess(t("Login_Successful"));
+                                    window.location.href = "/";
+                                }
                             }
                         } else {
                             toastError(result.data.message);

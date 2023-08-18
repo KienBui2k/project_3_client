@@ -2,10 +2,11 @@ import React, { useEffect, useState, useContext } from "react";
 import "./Cart.scss";
 import { RootContext } from "@/App";
 import CartItem from "./cartItem/CartItem";
-import { useSelector } from "react-redux";
-import CheckOut from "../checkOut/CheckOut";
+import api from "@api";
+
 export default function Cart() {
-    const { cartStore } = useContext(RootContext);
+    const { cartStore, localCartState, setLocalCartState } =
+        useContext(RootContext);
 
     const [cartItems, setCartTimes] = useState([]);
 
@@ -14,7 +15,7 @@ export default function Cart() {
             setCartTimes(cartStore.data?.cart_details);
         }
     }, [cartStore.data]);
-    console.log("ancawaufn", cartStore);
+
     const cartTotal = cartStore.data?.cart_details?.reduce((total, product) => {
         return total + product.quantity;
     }, 0);
@@ -22,15 +23,33 @@ export default function Cart() {
     const subTotal = cartStore?.data?.cart_details?.reduce((total, product) => {
         return total + product.quantity * Number(product.product.price);
     }, 0);
-    // console.log("cartStore", cartStore);
-    console.log("cartItems", cartItems);
 
-    // return;
+    async function generateDataCart() {
+        let carts = JSON.parse(localStorage.getItem("carts"));
+
+        for (let i in carts) {
+            console.log("carts carts", carts[i]);
+            carts[i].product = await api.products
+                .findProductById(carts[i].product_id)
+                .then((res) => res.data.data);
+        }
+        setCartTimes(carts);
+    }
+
+    useEffect(() => {
+        if (!localStorage.getItem("token")) {
+            if (localStorage.getItem("carts")) {
+                generateDataCart();
+            }
+        }
+    }, [localCartState]);
+
     return (
         <>
             <div className="cart_main">
                 <div className="cart_container">
-                    {cartItems?.length < 1 ? (
+                    {cartItems?.length == undefined ||
+                    cartItems?.length == 0 ? (
                         <p className="empty_cart_message">
                             Không có hàng trong giỏ
                         </p>
@@ -39,6 +58,7 @@ export default function Cart() {
                             <CartItem
                                 key={Date.now() * Math.random()}
                                 item={item}
+                                setCartTimes={setCartTimes}
                             />
                         ))
                     )}
@@ -56,8 +76,7 @@ export default function Cart() {
                                 }}
                                 className="checkOut_btn"
                             >
-                                {/* <CheckOut /> */}
-                                jjjjjjjj
+                                Check Out
                             </div>
                         </div>
                     ) : (

@@ -30,8 +30,7 @@ export default function ReceiptDetail(props) {
                             <div className="informationLine_text">
                                 <h4>{item.product.name} </h4>
                                 <p>
-                                    Price :{" "}
-                                    <span>{item.product.price} :VNĐ </span>
+                                    Price : <span>{item.note} </span>
                                 </p>
                                 <p>
                                     Quantity : <span> {item.quantity}</span>

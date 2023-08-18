@@ -33,14 +33,9 @@ function Home() {
                       {store.userStore?.data?.first_name}{" "}
                       {store.userStore?.data?.last_name}
                   </h1> */}
-                    <h1 className="brand_name">Fastfood</h1>
+                    <h1 className="brand_name">Fast food</h1>
                     <div className="feature">
-                        <span
-                            onClick={() => {
-                                navigate("/admin.v2");
-                            }}
-                            className="feature_item"
-                        >
+                        <span className="feature_item">
                             {t("Find_a_Store")}
                         </span>
 

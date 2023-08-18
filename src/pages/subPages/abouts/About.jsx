@@ -47,7 +47,10 @@ export default function About() {
                         </p>
                     </div>
                     <div className="cajas_img">
-                        <img src="./images/producto-1.png" alt=""></img>
+                        <img
+                            src="https://firebasestorage.googleapis.com/v0/b/bui-hai-kien-ejs.appspot.com/o/producto-4.png?alt=media&token=081c16d6-a18a-4207-95bd-a1d77c4aca68"
+                            alt=""
+                        ></img>
                     </div>
                 </div>
                 <div
@@ -56,7 +59,10 @@ export default function About() {
                     className="cajas_three"
                 >
                     <div className="cajas_img">
-                        <img src="./images/producto-1.png" alt=""></img>
+                        <img
+                            src="https://firebasestorage.googleapis.com/v0/b/bui-hai-kien-ejs.appspot.com/o/producto-2.png?alt=media&token=ded798fe-7566-4427-873b-e2e88a489e8a"
+                            alt=""
+                        ></img>
                     </div>
                     <div className="contenido">
                         <p>

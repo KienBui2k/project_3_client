@@ -45,18 +45,15 @@ export default function Footer() {
 
                     <div className="box">
                         <h3>{t("quick_links")}</h3>
-                        <a href="#home" onClick={() => navigate("/")}>
-                            {" "}
+                        <a onClick={() => navigate("/")}>
                             <i className="fas fa-arrow-right"></i> {t("home")}
                         </a>
-                        <a href="#about" onClick={() => navigate("/")}>
-                            {" "}
+                        <a onClick={() => navigate("/about")}>
                             <i className="fas fa-arrow-right"></i> {t("about")}
                         </a>
-                        <a href="#category" onClick={() => navigate("/")}>
-                            {" "}
+                        <a onClick={() => navigate("/contact")}>
                             <i className="fas fa-arrow-right"></i>
-                            {t("category")}
+                            Contact
                         </a>
                     </div>
 
@@ -71,13 +68,7 @@ export default function Footer() {
 
                     <div className="box">
                         <h3>{t("opening_hours")}</h3>
-                        <p>{t("monday")} : 7:00am to 10:00pm</p>
-                        <p>{t("tuesday")} : 7:00am to 10:00pm</p>
-                        <p>{t("wednesday")} : 7:00am to 10:00pm</p>
-                        <p>{t("thursday")} : 7:00am to 10:00pm</p>
-                        <p>{t("friday")} : 7:00am to 10:00pm</p>
-                        <p>{t("saturday")} : 7:00am to 10:00pm</p>
-                        <p>{t("sunday")} : 7:00am to 10:00pm</p>
+                        <span> 7:00am to 10:00pm </span>
                     </div>
                 </div>
                 <div className="bottom">

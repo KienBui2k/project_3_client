@@ -11,10 +11,10 @@ export default (
             path="login"
             element={LazyLoad(() => import("./Login"))()}
         ></Route>
-        <Route
+        {/* <Route
             path="profile"
             element={LazyLoad(() => import("./Info"))()}
-        ></Route>
+        ></Route> */}
         {Admin2}
         {/* <Route
             path="admin.v2"

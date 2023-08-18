@@ -52,7 +52,7 @@ export default function Menu() {
 
                 <div className="menu_list">
                     {categoryStore?.data?.map((product, index) => {
-                        const currentItemDelay = timeDelay + index * 600;
+                        const currentItemDelay = timeDelay + index * 400;
                         return (
                             <MenuItem
                                 product={product}

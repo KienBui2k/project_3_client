@@ -13,7 +13,7 @@
 
     font-size: $fs_medium;
     .before_nav {
-        background-color: $cl_body_main;
+        background-color: #817e7e;
         display: flex;
         justify-content: center;
         height: $beforeNavH;
@@ -33,19 +33,22 @@
                 font-size: 1em;
                 font-family: $f_brand;
                 display: flex;
-                // line-height: 30px;
+                color: white;
+                margin-top: 8px;
+                margin-left: 100px;
                 align-items: center;
                 justify-content: center;
             }
             .feature {
                 display: flex;
                 width: 30%;
-                // justify-content: right;
+
                 font-size: 1em;
                 justify-content: center;
                 .feature_item {
                     font-size: 0.65em;
-                    border-right: 2px solid black;
+                    color: white;
+                    border-right: 2px solid white;
                     width: 100%;
                     max-width: 120px;
                     margin-right: 10px;
@@ -123,7 +126,7 @@
                 width: 23%;
                 display: flex;
                 align-items: center;
-                justify-content: space-between;
+                justify-content: flex-end;
             }
         }
     }
@@ -161,7 +164,7 @@
         span {
             position: absolute;
             top: -12px;
-            right: -8px;
+            right: 8px;
             font-size: 16px;
             color: red;
         }
@@ -218,5 +221,22 @@
         display: block;
     }
 }
+.admin-button {
+    width: 26%;
+    height: 60%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 12px;
+    span {
+        color: white;
+        font-size: 20px;
+    }
 
-
+    &:hover {
+        background-color: white;
+        span {
+            color: black;
+        }
+    }
+}

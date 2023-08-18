@@ -33,23 +33,28 @@ const Admin2 = () => {
                         items={[
                             {
                                 icon: SketchOutlined,
+                                title: "Home",
+                                url: "/",
+                            },
+                            {
+                                icon: SketchOutlined,
                                 title: "List Product",
                                 url: "/admin.v2/",
                             },
                             {
-                                icon: VideoCameraOutlined,
+                                icon: SketchOutlined,
                                 title: "Add Product",
                                 url: "/admin.v2/addProduct",
                             },
                             {
-                                icon: ApartmentOutlined,
-                                title: "List Categories",
-                                url: "/admin.v2/addCategory",
+                                icon: SketchOutlined,
+                                title: "Receipts",
+                                url: "/admin.v2/receipts",
                             },
                             {
                                 icon: TeamOutlined,
                                 title: "users",
-                                url: "/admin.v2/",
+                                url: "/admin.v2/users",
                             },
                         ].map((item, index) => ({
                             key: String(index + 1),

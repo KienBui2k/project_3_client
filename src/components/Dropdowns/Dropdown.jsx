@@ -2,6 +2,7 @@ import React from "react";
 import "./dropdown.scss";
 import { Link, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+
 export default function DropdownLogout({ userStore }) {
     const { t } = useTranslation();
     const navigate = useNavigate();
@@ -26,7 +27,12 @@ export default function DropdownLogout({ userStore }) {
                 <li>
                     <Link className="dropdown-item" to="profile">
                         Profile
-                    </Link> 
+                    </Link>
+                </li>
+                <li>
+                    <Link className="dropdown-item" to="receipts">
+                        My order
+                    </Link>
                 </li>
                 <li>
                     <a
@@ -35,7 +41,7 @@ export default function DropdownLogout({ userStore }) {
                             handleLogout();
                         }}
                     >
-                        Logout
+                        Log out
                     </a>
                 </li>
             </ul>

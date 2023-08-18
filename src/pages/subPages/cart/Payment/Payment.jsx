@@ -51,7 +51,7 @@ export default function Payment() {
             .then((res) => {
                 message.success("Cảm ơn bạn đã mua hàng!");
 
-                navigate("/");
+                window.location.href = "/";
 
                 // chuyển trang receipt
                 console.log("Đã save receipt", res.data);
@@ -149,72 +149,90 @@ export default function Payment() {
                         className="form-group"
                         style={{ position: "relative" }}
                     >
-                        <h2>Information</h2>
-                        <div className="form-groupInput">
-                            <input
-                                id="name"
-                                className="form-group-input"
-                                type="text"
-                                placeholder="Name"
-                                name="userName"
-                            />
-                            <br />
-                            <input
-                                id="phone"
-                                className="form-group-input"
-                                type="text"
-                                placeholder="Phone Number"
-                                name="userPhoneNumber"
-                            />
-                            <br />
-                            <input
-                                id="address"
-                                className="form-group-input"
-                                type="text"
-                                placeholder="Address"
-                                name="userAddress"
-                            />
-                            <br />
+                        <div className="form-info">
+                            <h2>Information</h2>
+                            <div className="form-groupInput">
+                                <input
+                                    id="name"
+                                    className="form-group-input"
+                                    type="text"
+                                    placeholder="Name"
+                                    name="userName"
+                                />
+                                <br />
+                                <input
+                                    id="phone"
+                                    className="form-group-input"
+                                    type="text"
+                                    placeholder="Phone Number"
+                                    name="userPhoneNumber"
+                                />
+                                <br />
+                                <input
+                                    id="address"
+                                    className="form-group-input"
+                                    type="text"
+                                    placeholder="Address"
+                                    name="userAddress"
+                                />
+                                <br />
+                            </div>
                         </div>
                         {/* Xử lý tại đây */}
                         <form
                             onSubmit={(eventForm) => {
                                 checkOut(eventForm);
                             }}
+                            className="shipping-form"
                         >
-                            <div className="shippingDetails">
-                                <p>Payment methods</p>
-                                <input
-                                    type="radio"
-                                    name="payment"
-                                    value="CASH"
-                                />
-                                <span>Cash</span>
+                            <div className="shipping_detail">
+                                <div className="shipping_method">
+                                    <p>Payment methods</p>
+                                    <div className="group_method">
+                                        <input
+                                            type="radio"
+                                            name="payment"
+                                            value="CASH"
+                                        />
+                                        <span>Cash</span>
+                                    </div>
 
-                                <input
-                                    className="zalo"
-                                    type="radio"
-                                    name="payment"
-                                    value="ZALO"
-                                />
-                                <span> Zalo</span>
-
-                                <input
-                                    type="radio"
-                                    name="payment"
-                                    value="MOMO"
-                                />
-                                <span>Momo</span>
-                                <div className="shippingDetails_button">
-                                    <img src="../images/payment.png" />
+                                    <div className="group_method">
+                                        <input
+                                            className="zalo"
+                                            type="radio"
+                                            name="payment"
+                                            value="ZALO"
+                                        />
+                                        <span> Zalo</span>
+                                    </div>
+                                    <div className="group_method">
+                                        <input
+                                            type="radio"
+                                            name="payment"
+                                            value="MOMO"
+                                        />
+                                        <span>Momo</span>
+                                    </div>
+                                </div>
+                                <div className="shippingDetails_img">
+                                    <img src="../images/payment.jpg" />
                                 </div>
                             </div>
-                            <button
-                                type="submit"
-                                className="form-group-checkout"
-                            >
-                                Check Out
-                            </button>
+                            <div className="check_out_btn_container">
+                                <button
+                                    type="button"
+                                    className="form-group-checkout"
+                                >
+                                    Your cart
+                                </button>
+                                <button
+                                    type="submit"
+                                    className="form-group-checkout"
+                                >
+                                    Check Out
+                                </button>
+                            </div>
                         </form>
                         <p className="validate-email" />
                         {qrShow && qrData != null ? <Qr {...qrData} /> : <></>}
@@ -223,7 +241,10 @@ export default function Payment() {
                         {cartItems?.map((item, index) => (
                             <div>
                                 <div className="informationLine_product">
-                                    <img src={`${item.product.avatar}`} />
+                                    <div className="product_img">
+                                        <img src={`${item.product.avatar}`} />
+                                    </div>
+
                                     <div className="informationLine_text">
                                         <h4>{item.product.name}</h4>
                                         <p>

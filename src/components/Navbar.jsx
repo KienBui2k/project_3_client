@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 
 /* Antd */
 import { AutoComplete, Input } from "antd";
@@ -9,68 +9,63 @@ import DropdownLogout from "./Dropdowns/Dropdown";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import { RootContext } from "../App";
-
+import api from "@api";
 export default function Navbar() {
-    const { cartStore } = useContext(RootContext);
+    const { cartStore, localCartState } = useContext(RootContext);
     const { t } = useTranslation();
     const [isLogin, setIsLogin] = useState(
         () => localStorage.getItem("token") || null
     );
     const navigate = useNavigate();
-    const renderTitle = (title) => (
-        <span>
-            {title}
-            <a
-                style={{
-                    float: "right",
-                }}
-                href="https://www.google.com/search?q=antd"
-                target="_blank"
-                rel="noopener noreferrer"
-            >
-                more
-            </a>
-        </span>
-    );
 
-    const renderItem = (title, count) => ({
-        value: title,
-        label: (
-            <div
-                style={{
-                    display: "flex",
-                    justifyContent: "space-between",
-                }}
-            >
-                {title}
-                <span>
-                    <UserOutlined /> {count}
-                </span>
-            </div>
-        ),
-    });
+    const [cartLocalTotal, setCartLocalTotal] = useState(null);
+    const [isAdmin, setIsAdmin] = useState(false);
 
-    const options = [
-        {
-            label: renderTitle("Libraries"),
-            options: [
-                renderItem("AntDesign", 10000),
-                renderItem("AntDesign UI", 10600),
-            ],
-        },
-        {
-            label: renderTitle("Solutions"),
-            options: [
-                renderItem("AntDesign UI FAQ", 60100),
-                renderItem("AntDesign FAQ", 30010),
-            ],
-        },
-        {
-            label: renderTitle("Articles"),
-            options: [renderItem("AntDesign design language", 100000)],
-        },
-    ];
+    async function totalCartAsync() {
+        if (!localStorage.getItem("token")) {
+            if (localStorage.getItem("carts")) {
+                let carts = JSON.parse(localStorage.getItem("carts"));
+                for (let i in carts) {
+                    carts[i].product = await api.products
+                        .findProductById(carts[i].product_id)
+                        .then((res) => res.data.data);
+                }
+                let total = carts.reduce((result, nextItem) => {
+                    return (result += nextItem.quantity);
+                }, 0);
 
+                setCartLocalTotal(total);
+            }
+        }
+    }
+
+    useEffect(() => {
+        totalCartAsync();
+    }, [localCartState]);
+    useEffect(() => {
+        authenAdmin();
+    }, []);
+    async function authenAdmin() {
+        try {
+            const response = await api.users.authenToken({
+                token: localStorage.getItem("token"),
+            });
+
+            if (
+                response.status === 200 &&
+                response.data.data.role === "ADMIN"
+            ) {
+                setIsAdmin(true);
+            }
+        } catch (error) {
+            console.log("err", error);
+        }
+    }
+    function totalCart() {
+        return cartStore.data?.cart_details?.reduce((result, nextItem) => {
+            return (result += nextItem.quantity);
+        }, 0);
+    }
     return (
         <nav>
             <div className="nav_content">
@@ -149,23 +144,15 @@ export default function Navbar() {
                 </div>
 
                 <div className="right_content">
-                    {/* Search */}
-                    <AutoComplete
-                        popupClassName="certain-category-search-dropdown"
-                        popupMatchSelectWidth={500}
-                        style={{
-                            width: 250,
-                        }}
-                        options={options}
-                    >
-                        <Input.Search
-                            style={{ position: "relative", right: "30px" }}
-                            size="large"
-                            placeholder="input here"
-                        />
-                    </AutoComplete>
+                    {/* {isLogin ? <DropdownLogout /> : <></>} */}
 
-                    {/* Cart */}
+                    {isAdmin && ( // Hiển thị nút quản lý chỉ khi là admin
+                        <Link to="/admin.v2" className="admin-button">
+                            <span> Quản Lý</span>
+                        </Link>
+                    )}
+
+                    {isLogin ? <DropdownLogout /> : <></>}
                     <div
                         onClick={() => {
                             navigate("/cart");
@@ -173,17 +160,15 @@ export default function Navbar() {
                         className="cart_coutn "
                     >
                         <span>
-                            {cartStore.data?.cart_details?.reduce(
-                                (result, nextItem) => {
-                                    return (result += nextItem.quantity);
-                                },
-                                0
-                            )}
+                            {cartLocalTotal != null
+                                ? cartLocalTotal
+                                : totalCart()}
                         </span>
-                        <i className="fa-solid fa-cart-shopping"></i>
+                        <i
+                            style={{ marginRight: "20px", marginLeft: "20px" }}
+                            className="fa-solid fa-cart-shopping"
+                        ></i>
                     </div>
-
-                    {isLogin ? <DropdownLogout /> : <></>}
                 </div>
             </div>
         </nav>

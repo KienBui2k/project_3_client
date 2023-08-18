@@ -1,23 +1,25 @@
 import "./main.scss";
 import { Routes } from "react-router-dom";
-import { createContext, useEffect } from "react";
+import { createContext, useEffect, useState } from "react";
 import api from "@api";
 /* Route Config */
 import AuthRoute from "@pages/auths/Route";
 import HomeRoute from "@pages/home/Route";
 
 import { useDispatch, useSelector } from "react-redux";
+import { userActions } from "@actions/user";
 import actions from "./stores/actions";
 
 // Context Config
 export const RootContext = createContext();
 
 function App() {
+    const [localCartState, setLocalCartState] = useState(false);
     const store = useSelector((store) => store);
     const dispatch = useDispatch();
 
     useEffect(() => {
-        dispatch(actions.userActions.authenToken());
+        dispatch(userActions.authenToken());
     }, []);
 
     useEffect(() => {
@@ -71,6 +73,8 @@ function App() {
                 productActions: actions.productActions,
                 productStore: store.productStore,
                 receiptStore: store.receiptStore,
+                localCartState,
+                setLocalCartState,
             }}
         >
             <Routes>

@@ -38,10 +38,14 @@ export default (
             )()}
         ></Route>
         <Route
-            path="addCategory"
+            path="receipts"
             element={LazyLoad(() =>
-                import("./component_v2/Category_manage/Category")
+                import("./component_v2/Receipts_manage/Receipts")
             )()}
+        ></Route>
+        <Route
+            path="users"
+            element={LazyLoad(() => import("./component_v2/users/Users"))()}
         ></Route>
     </Route>
 );
